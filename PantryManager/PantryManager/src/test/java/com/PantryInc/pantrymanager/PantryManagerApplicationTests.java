@@ -1,4 +1,4 @@
-package com.example.pantrymanager.PantryManager;
+package com.PantryInc.pantrymanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.example.pantrymanager.PantryManager;
+package com.PantryInc.pantrymanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
