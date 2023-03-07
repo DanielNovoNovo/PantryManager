@@ -14,9 +14,12 @@ import lombok.NoArgsConstructor;
 public class RecetaToIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @Column(name = "Id_receta")
     private int idReceta;
+    @Column(name = "Id_ingrediente")
     private int idIngrediente;
+    @Column(name = "Cantidad")
     private String cantidad;
 
     public RecetaToIngrediente(int idReceta, int idIngrediente, String cantidad) {

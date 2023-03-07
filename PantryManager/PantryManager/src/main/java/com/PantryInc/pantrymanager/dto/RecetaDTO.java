@@ -26,22 +26,22 @@ public class RecetaDTO {
 
     private String enlace;
 
-    public Receta convertirModel(){
+    public Receta convertirModel() {
 
-    Receta receta = new Receta();
-    receta.setId(this.Id);
-    receta.setNombre(this.nombre);
-    receta.setPasos(this.pasos);
-    receta.setTiempo_preparacion(this.tiempo_preparacion);
-    receta.setDificultad(this.dificultad);
-    receta.setTipo_comida(this.tipo_comida);
-    receta.setAutor(this.autor);
-    receta.setEnlace(this.enlace);
-    return receta;
+        Receta receta = new Receta();
+        receta.setId(this.Id);
+        receta.setNombre(this.nombre);
+        receta.setPasos(this.pasos);
+        receta.setTiempo_preparacion(this.tiempo_preparacion);
+        receta.setDificultad(this.dificultad);
+        receta.setTipo_comida(this.tipo_comida);
+        receta.setAutor(this.autor);
+        receta.setEnlace(this.enlace);
+        return receta;
 
     }
 
-    public RecetaDTO crearDTO(Receta receta){
+    public RecetaDTO crearDTO(Receta receta) {
         this.setId(receta.getId());
         this.setNombre(receta.getNombre());
         this.setPasos(receta.getPasos());
@@ -52,7 +52,4 @@ public class RecetaDTO {
         this.setEnlace(receta.getEnlace());
         return this;
     }
-
-
-
 }

@@ -16,7 +16,7 @@ public class IngredienteDTO {
     private int calorias;
     private String imagen;
 
-    public Ingrediente convertirAModel(Integer id, String nomrbe, String tipo, int calorias, String imagen) {
+    public Ingrediente convertirAModel(Integer id, String nombre, String tipo, int calorias, String imagen) {
         Ingrediente ingrediente = new Ingrediente(id, nombre, tipo, calorias, imagen);
         return ingrediente;
     }

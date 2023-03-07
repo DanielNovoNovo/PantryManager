@@ -19,15 +19,15 @@ import java.util.Optional;
 public class IngredienteController {
 
     @Autowired
-    private IngredienteService servico;
+    private IngredienteService servicio;
 
     @PostMapping("/insertar")
     @Operation(summary = "Inserta un ingrediente")
     public ResponseEntity<?> crearIngrediente(@RequestBody IngredienteDTO ingredienteDTO) {
-        Optional<Ingrediente> ingredienteConsultado = servico.consultarPorNombre(ingredienteDTO.getNombre());
+        Optional<Ingrediente> ingredienteConsultado = servicio.consultarPorNombre(ingredienteDTO.getNombre());
 
         if (!ingredienteConsultado.isPresent()) {
-            Ingrediente ingredienteGuardado = servico.
+            Ingrediente ingredienteGuardado = servicio.
                     guardar(ingredienteDTO.convertirAModel(ingredienteDTO.getId(), ingredienteDTO.getNombre(),
                             ingredienteDTO.getTipo(), ingredienteDTO.getCalorias(), ingredienteDTO.getImagen()));
             return ResponseEntity.status(HttpStatus.CREATED).body(ingredienteGuardado);

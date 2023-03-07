@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 public interface RecetaToIngredienteRepository extends JpaRepository<RecetaToIngrediente, Integer> {
-    List<Receta> findByIngredienteId(int id);
-    List<Ingrediente> findByRecetaId(int id);
-
-
+    List<Receta> findByIdIngrediente(int idIngrediente);
+    List<Ingrediente> findByIdReceta(int idReceta);
 }

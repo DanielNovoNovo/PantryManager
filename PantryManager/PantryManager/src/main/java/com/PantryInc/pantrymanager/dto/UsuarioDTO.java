@@ -15,7 +15,7 @@ public class UsuarioDTO {
     private String Email;
     private String Contraseña;
 
-    public Usuario convertirModel(Integer id,String nombre, String email, String contraseña){
+    public Usuario convertirModel(Integer id, String nombre, String email, String contraseña) {
         Usuario usuario = new Usuario();
         usuario.setId(this.getId());
         usuario.setNombre(this.getNombre());
@@ -24,7 +24,7 @@ public class UsuarioDTO {
         return usuario;
     }
 
-    public UsuarioDTO crearDTO(Usuario usuario){
+    public UsuarioDTO crearDTO(Usuario usuario) {
         this.setId(usuario.getId());
         this.setNombre(usuario.getNombre());
         this.setEmail(usuario.getEmail());
