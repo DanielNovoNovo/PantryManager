@@ -8,6 +8,12 @@ solo con el proyecto Java, que es con lo que tendremos que trabajar)
 FUNCIONAMIENTO:
 - Tendréis que trabajar siempre sobre vuestra rama
 - Cada vez que hagais un cambios dentro de la rama, tenéis que 
-hacer un Commit para que estos de apliquen
+hacer un Commit para que estos se apliquen localmente
 (al hacer este Commit, se actualiza simplemente vuestra rama, no
 el main)
+- Si hacéis un Push origin de vuestra rama, lo que estaréis 
+haciendo es actualizar en GitHub.com el contenido de vuestra rama 
+para que el resto podamos visualizarlo)
+
+IMPORTANTE:
+Pasos a seguir para fusionar un rama con el main:
