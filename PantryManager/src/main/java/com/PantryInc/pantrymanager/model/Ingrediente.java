@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Ingrediente {
-<<<<<<< HEAD
-
-=======
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -73,5 +70,4 @@ public class Ingrediente {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
->>>>>>> Oscar
 }
