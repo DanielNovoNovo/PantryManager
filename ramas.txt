@@ -1,7 +1,13 @@
+CREACIÓN DE UNA RAMA:
+1. New branch (al crearla se hará una copia del contenido 
+que hay en la rama main. Podéis borrar la documentación y quedaros
+solo con el proyecto Java, que es con lo que tendremos que trabajar)
+2. Asignar nombre ("vuestroNombre") --> Create branch
+3. Publish branch (para hacerla pública y visible desde GitHub.com)
 
-1. New branch
-2. Asignar nombre --> Create branch
-3. Publish branch
-
-Cada vez que hagais un cambio dentro de vuestra rama, hacéis
-un commit para que se apliquen esos cambios
+FUNCIONAMIENTO:
+- Tendréis que trabajar siempre sobre vuestra rama
+- Cada vez que hagais un cambios dentro de la rama, tenéis que 
+hacer un Commit para que estos de apliquen
+(al hacer este Commit, se actualiza simplemente vuestra rama, no
+el main)
