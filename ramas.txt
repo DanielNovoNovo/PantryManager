@@ -3,4 +3,5 @@
 2. Asignar nombre --> Create branch
 3. Publish branch
 
-a
+Cada vez que hagais un cambio dentro de vuestra rama, hacéis
+un commit para que se apliquen esos cambios
