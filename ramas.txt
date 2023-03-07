@@ -1,0 +1,27 @@
+CREACIÓN DE UNA RAMA:
+1. New branch (al crearla se hará una copia del contenido 
+que hay en la rama main. Podéis borrar la documentación y quedaros
+solo con el proyecto Java, que es con lo que tendremos que trabajar)
+2. Asignar nombre ("vuestroNombre") --> Create branch
+3. Publish branch (para hacerla pública y visible desde GitHub.com)
+
+FUNCIONAMIENTO:
+- Tendréis que trabajar siempre sobre vuestra rama
+- Cada vez que hagais un cambios dentro de la rama, tenéis que 
+hacer un Commit para que estos se apliquen localmente
+(al hacer este Commit, se actualiza simplemente vuestra rama, no
+el main)
+- Si hacéis un Push origin de vuestra rama, lo que estaréis 
+haciendo es actualizar en GitHub.com el contenido de vuestra rama 
+para que el resto podamos visualizarlo)
+
+FUSIONAR VUESTRAS RAMAS CON LA RAMA MAIN:
+1. Seleccionar "main" en GitHub Desktop y hacer
+2. IMPORTANTE: Antes de fusionar nada, hacer un Fetch origin
+para incorporar todos los cambios que han realizado desde la última
+vez que habéis hecho un Fetch origin del Main
+(si omitís este paso actualizaréis el main con vuestra rama pero
+se perderán todos los cambios realizados por el resto de compañeros
+desde la última vez que hicisteis el Fetch origin en vuestro PC)
+3. Branch (menú superior) --> Merge into current branch ...
+4. Seleccionáis vuestra rama --> Create a merge commit
