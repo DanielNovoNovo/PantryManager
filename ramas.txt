@@ -15,5 +15,9 @@ el main)
 haciendo es actualizar en GitHub.com el contenido de vuestra rama 
 para que el resto podamos visualizarlo)
 
-IMPORTANTE:
-Pasos a seguir para fusionar un rama con el main:
+FUSIONAR VUESTRAS RAMAS CON LA RAMA MAIN:
+1. Seleccionar "main" en GitHub Desktop y hacer
+2. IMPORTANTE: Antes de fusionar nada, hacer un Fetch origin
+para incorporar todos los cambios que han realizado desde la última
+vez que habéis hecho un Fetch origin del Main
+3. Branch (menú superior) --> Merge into current branch ...
