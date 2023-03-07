@@ -1,0 +1,13 @@
+1) ENTIDAD: Usuario
+	* Registrarse
+		a) [Consultar por nombre OR email]
+			a.1) Si devuelve algo, cancelamos el registro
+			a.2) Si no devuelve nada, [Insertamos un objeto Usuario en la BD]
+
+	* Iniciar sesión
+		a) [Consultar por nombre nombre AND email]
+			a.1) Si devuelve algo, accedemos a la aplicación
+			a.2) Si no devuelve nada, cancelamos el inicio de sesión
+
+2) ENTIDAD: Receta
+	* Filtrar por nombre
