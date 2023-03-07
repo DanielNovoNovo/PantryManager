@@ -28,9 +28,26 @@ desde la última vez que hicisteis el Fetch origin en vuestro PC)
 4. Seleccionáis vuestra rama --> Create a merge commit
 5. Push origin para llevar todos los cambios a GitHub.com
 
+<<<<<<< HEAD
 En resumen, trabajaremos siempre sobre nuestras ramas y simplemente
 tendremos que cambiar al Main cuando vayamos a hacer un merge para
 fusionar el contenido de nuestra rama con el del propio Main
+=======
+(si queréis hacer el proceso inverso y fusionar el contenido del Main
+con vuestra rama, para así trabajar sobre el proyecto completo,
+procedéis de la misma forma pero haciendo el merge desde
+vuestra rama y seleccionando después el Main)
+
+En resumen, trabajaremos siempre sobre nuestras ramas y simplemente
+tendremos que cambiar al Main cuando vayamos a hacer un merge para
+fusionar el contenido de nuestra rama con el del propio Main
+Esto implica que cada vez que vayáis a abrir el proyeto tendréis 
+que hacerlo desde vuestra rama (es decir, tenéis que tenerla 
+marcada en vuestro GitHub Desktop. Esto lo comento para que os
+acordéis de marcar de nuevo vuestra rama después de hacer el merge)
+
+
+>>>>>>> Oscar
 
 
 
