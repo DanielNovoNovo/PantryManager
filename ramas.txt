@@ -23,5 +23,4 @@ vez que habéis hecho un Fetch origin del Main
 (si omitís este paso actualizaréis el main con vuestra rama pero
 se perderán todos los cambios realizados por el resto de compañeros
 desde la última vez que hicisteis el Fetch origin en vuestro PC)
->>>>>>> Stashed changes
 3. Branch (menú superior) --> Merge into current branch ...
