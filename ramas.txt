@@ -25,3 +25,6 @@ se perderán todos los cambios realizados por el resto de compañeros
 desde la última vez que hicisteis el Fetch origin en vuestro PC)
 3. Branch (menú superior) --> Merge into current branch ...
 4. Seleccionáis vuestra rama --> Create a merge commit
+5. Push origin para llevar todos los cambios a GitHub.com
+
+
