@@ -1,0 +1,20 @@
+- ACCEDER AL SWAGGER
+http://localhost:8090/swagger-ui/index.html
+
+- INSERTAR UN REGISTRO:
+http://localhost:8090/api/ingredientes/insertar
+
+{
+    "id": 1,
+    "nombre": "Verdura",
+    "tipo": "Vegetal",
+    "calorias": 100,
+    "imagen": "verdura.png"
+}
+
+- CONSULTAR POR X CAMPO:
+http://localhost:8090/api/ingredientes/consultar_por_nombre?nombre=Verdura
+http://localhost:8090/api/ingredientes/consultar_por_calorias?calorias=3000
+
+- BORRAR UN REGISTRO:
+http://localhost:8090/api/ingredientes/borrar_por_id?id=1
