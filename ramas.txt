@@ -20,4 +20,10 @@ FUSIONAR VUESTRAS RAMAS CON LA RAMA MAIN:
 2. IMPORTANTE: Antes de fusionar nada, hacer un Fetch origin
 para incorporar todos los cambios que han realizado desde la última
 vez que habéis hecho un Fetch origin del Main
+<<<<<<< Updated upstream
+=======
+(si omitís este paso actualizaréis el main con vuestra rama pero
+se perderán todos los cambios realizados por el resto de compañeros
+desde la última vez que hicisteis el Fetch origin en vuestro PC)
+>>>>>>> Stashed changes
 3. Branch (menú superior) --> Merge into current branch ...
