@@ -6,7 +6,7 @@ Existirán 5 niveles de Usuario:
 	3) Usuario-moderador: usuario registrado + capacidad de rechazar/aceptar propuestas de receta de los usuarios
 	4) Usuario-administrador: usuario con plenos privilegios sobre la aplicación (puede gestionar la BD a su antojo,
 	borrando usuarios, recetas...)
-	dar derechos de administrador a otros usuarios. Sí puede otorgar derechos de moderador
+	No puede dar derechos de administrador a otros usuarios, pero sí puede otorgar derechos de moderador
 	5) Godadmin: cuenta dueña de la aplicación: usuario-administrador + capacidad de proporcionar derechos de
 	administrador a otros usuarios
 	* Habrá que añadir un campo para especificarlo; p.e: Nivel_de_usuario 
@@ -84,7 +84,7 @@ Existirán 5 niveles de Usuario:
 			END;
 			
 	* Proponer recetas (opción solo visible para usuarios de nivel 2, 3 y 4)
-		- Se agregará un campo "Estado" a la tabla, que podrá 3 valores ("Aceptada", "Pendiente", "Rechazada")
+		- Se agregará un campo "Estado" a la tabla, que podrá tomar 3 valores ("Aceptada", "Pendiente", "Rechazada")
 		- Se agregarán 3 campos (int); "VotosPositivos", "VotosNegativos" y "VotosTotales"
 		a) [Insertamos un objeto Receta en la BD, Estado = "Pendiente"]
 		b) [Insertamos los ingredientes que contendrá y la cantidad de cada uno - Tabla tiene]
@@ -111,10 +111,10 @@ Existirán 5 niveles de Usuario:
 	usuario podría crear su propias recetas y añadirlas a su lista personal sin que éstas interfieran en los
 	algoritmos de recomendación para el resto de usuarios
 	(tened en cuenta que tal y como está montado solo existen recetas predefinidas que los usuarios proponen y
-	los moderadores votan). Ya si tal lo dejamos para el final, que tampoco conviene venirse arriba
+	los moderadores votan).
 	Para el caso de los ingredientes va a ocurrir lo mismo, partimos de un BD de ingredientes ya predefinida
 	que solo los administradores y el godadmin podrán modificar. EL usuario corriente solo podra módificar
-	la cantidad almacenada de la Tabla 'almacena'
+	la 'cantidad almacenada' de la Tabla 'almacena'
 
 3. ENTIDAD: Ingrediente
 	* Obtener listado completo de Ingredientes (para cuando sea necesario devolverlos en un List Box)
