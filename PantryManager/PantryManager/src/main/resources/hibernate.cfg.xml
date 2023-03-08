@@ -17,12 +17,12 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
-        <mapping class="org.example.model.Autor"/>
-        <mapping class="org.example.model.Ingrediente"/>
-        <mapping class="org.example.model.RecetaToIngrediente"/>
-        <mapping class="org.example.model.Usuario"/>
-        <mapping class="org.example.model.UsuarioToIngrediente"/>
-        <mapping class="org.example.model.Receta"/>
-        <mapping class="org.example.model.UsuarioToReceta"/>
+        <mapping class="com.PantryInc.pantrymanager.model.Autor"/>
+        <mapping class="com.PantryInc.pantrymanager.model.Ingrediente"/>
+        <mapping class="com.PantryInc.pantrymanager.model.RecetaToIngrediente"/>
+        <mapping class="com.PantryInc.pantrymanager.model.Usuario"/>
+        <mapping class="com.PantryInc.pantrymanager.model.UsuarioToIngrediente"/>
+        <mapping class="com.PantryInc.pantrymanager.model.Receta"/>
+        <mapping class="com.PantryInc.pantrymanager.model.UsuarioToReceta"/>
     </session-factory>
 </hibernate-configuration>

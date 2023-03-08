@@ -21,6 +21,13 @@ public class RecetaToIngrediente {
     private int idIngrediente;
     @Column(name = "Cantidad")
     private String cantidad;
+    @ManyToOne
+    @JoinColumn(name = "Id_receta", insertable = false, updatable = false)
+    private Receta receta;
+    @ManyToOne
+    @JoinColumn(name = "Id_ingrediente", insertable = false, updatable = false)
+    private Ingrediente ingrediente;
+
 
     public RecetaToIngrediente(int idReceta, int idIngrediente, String cantidad) {
         this.idReceta = idReceta;
@@ -30,6 +37,22 @@ public class RecetaToIngrediente {
 
     public int getId() {
         return id;
+    }
+
+    public Receta getReceta() {
+        return receta;
+    }
+
+    public void setReceta(Receta receta) {
+        this.receta = receta;
+    }
+
+    public Ingrediente getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
     public void setId(int id) {

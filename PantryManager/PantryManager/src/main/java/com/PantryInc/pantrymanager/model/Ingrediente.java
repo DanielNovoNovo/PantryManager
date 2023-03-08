@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "Ingrediente")
 @NoArgsConstructor
@@ -23,13 +26,9 @@ public class Ingrediente {
     private int calorias;
     @Column(name = "Imagen")
     private String imagen;
+    @OneToMany(mappedBy = "ingrediente")
+    private Set<RecetaToIngrediente> recetaToIngrediente;
 
-    public Ingrediente(String nombre, String tipo, int calorias, String imagen) {
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.calorias = calorias;
-        this.imagen = imagen;
-    }
 
     public Integer getId() {
         return id;
@@ -70,4 +69,12 @@ public class Ingrediente {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public Set<RecetaToIngrediente> getRecetaToIngrediente() {
+        return recetaToIngrediente;
+    }
+    public void setRecetaToIngrediente(Set<RecetaToIngrediente> recetaToIngrediente) {
+        this.recetaToIngrediente = recetaToIngrediente;
+    }
+
 }
