@@ -87,6 +87,11 @@ Existirán 5 niveles de Usuario:
 		- Se agregará un campo "Estado" a la tabla, que podrá 3 valores ("Aceptada", "Pendiente", "Rechazada")
 		- Se agregarán 3 campos (int); "VotosPositivos", "VotosNegativos" y "VotosTotales"
 		a) [Insertamos un objeto Receta en la BD, Estado = "Pendiente"]
+		b) [Insertamos los ingredientes que contendrá y la cantidad de cada uno - Tabla tiene]
+		(Al proponer una receta nos aparecerá un List Box que nos permitirá marcar el ingrediente y un Text Box
+		o Slider para asignar la cantidad. Por último, o botón de Añadir para insertar dicha info, en la tabla.
+		El List Box debe retornar la lista de todos los ingredientes y debe adminitar filtros, pero eso ya
+		iría en el apartado de Ingredientes)
 
 	* Moderar recetas (opción solo visible para usuarios de nivel 3)
 		a) [Actualizamos los campos VotosPositivos, VotosNegativos y VotosTotales]
@@ -104,19 +109,34 @@ Existirán 5 niveles de Usuario:
 	*** Aquí también sería interesante añadir un campo boleano (p.e. EsPersonalizada) para indicar
 	que recetas pertecen al catálogo general y cuales son propias de cada usuario. De esta forma, cada
 	usuario podría crear su propias recetas y añadirlas a su lista personal sin que éstas interfieran en los
-	algoritmos de recomendación
+	algoritmos de recomendación para el resto de usuarios
 	(tened en cuenta que tal y como está montado solo existen recetas predefinidas que los usuarios proponen y
 	los moderadores votan). Ya si tal lo dejamos para el final, que tampoco conviene venirse arriba
 	Para el caso de los ingredientes va a ocurrir lo mismo, partimos de un BD de ingredientes ya predefinida
-	que solo los administradores y el godadmin podrán modificar
+	que solo los administradores y el godadmin podrán modificar. EL usuario corriente solo podra módificar
+	la cantidad almacenada de la Tabla 'almacena'
 
 3. ENTIDAD: Ingrediente
-	* Agregar, actualizar y eliminar recetas (opción solo visible para los usuarios de nivel 4 y 5)
+	* Obtener listado completo de Ingredientes (para cuando sea necesario devolverlos en un List Box)
+	[Consultar la tabla entera de Ingrediente]
 
+	* Filtrar ingredientes por nombre
+	[Consultar por nombre en la Tabla Ingredientes]
 
+	* Actualizar la cantidad almacenada de cada ingrediente (opción visible para usuarios de nivel 2 en adelante)
+	[Update en 'cantidadAlmacenada' de la Tabla 'almacena', filtrando por idUsuario]
 
+	* Agregar, actualizar y eliminar Ingredientes (opción solo visible para los usuarios de nivel 4 y 5)
 
- . . . Todavía faltan por añadir más, pero con estas vamos tirando . . .
+4. ENTIDAD: Autor
+	* Obtener listado completo de Autores
+	[Consultar la tabla entera de Autores]
+
+	* Agregar filtros a la lista de Autores
+	[Consultar por nombre AND apellido AND pais]
+
+	* Agregar, actualizar y eliminar Autores (opción solo visible para los usuarios de nivel 4 y 5)
+
 
 
 
