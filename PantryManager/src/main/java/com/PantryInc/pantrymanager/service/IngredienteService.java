@@ -6,15 +6,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IngredienteService {
-    public List<Ingrediente> buscarIngrediente();
+    public Ingrediente create(Ingrediente ingrediente);
 
-    public Optional<Ingrediente> consultar(Integer id);
+    public List<Ingrediente> getAll();
 
-    public Optional<Ingrediente> consultarPorNombre(String nombre);
+    public List<Ingrediente> getByAllFields(String nombre, String tipo, int calorias, String imagen);
 
-    public Optional<Ingrediente> consultarPorCalorias(int calorias);
+    public Optional<Ingrediente> getById(Integer id);
 
-    public Ingrediente guardar(Ingrediente ingrediente);
+    public Optional<Ingrediente> getByNombre(String nombre);
 
-    public void borrar(Integer id);
+    public Ingrediente update(Ingrediente ingrediente);
+
+    public void deleteById(Integer id);
 }

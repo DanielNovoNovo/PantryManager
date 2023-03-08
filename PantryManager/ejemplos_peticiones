@@ -1,8 +1,22 @@
 - ACCEDER AL SWAGGER
 http://localhost:8090/swagger-ui/index.html
 
-- INSERTAR UN REGISTRO:
-http://localhost:8090/api/ingredientes/insertar
+- INSERTAR UN REGISTRO (POST)
+http://localhost:8090/api/ingredientes/crear
+
+{
+    "nombre": "Verdura",
+    "tipo": "Vegetal",
+    "calorias": 100,
+    "imagen": "verdura.png"
+}
+
+- CONSULTAR POR X CAMPO (GET)
+http://localhost:8090/api/ingredientes/consultar_por_nombre?nombre=Verdura (con @RequestParameter)
+http://localhost:8090/api/ingredientes/listar_por_nombre/Tomate (con @PathVariable)
+
+- ACTUALIZAR UN REGISTRO (PUT)
+http://localhost:8090/api/ingredientes/actualizar
 
 {
     "id": 1,
@@ -12,9 +26,6 @@ http://localhost:8090/api/ingredientes/insertar
     "imagen": "verdura.png"
 }
 
-- CONSULTAR POR X CAMPO:
-http://localhost:8090/api/ingredientes/consultar_por_nombre?nombre=Verdura
-http://localhost:8090/api/ingredientes/consultar_por_calorias?calorias=3000
-
 - BORRAR UN REGISTRO:
-http://localhost:8090/api/ingredientes/borrar_por_id?id=1
+http://localhost:8090/api/ingredientes/borrar_por_id?id=1 (con @RequestParameter)
+http://localhost:8090/api/ingredientes/borrar_por_id/1 (con @PathVariable)
