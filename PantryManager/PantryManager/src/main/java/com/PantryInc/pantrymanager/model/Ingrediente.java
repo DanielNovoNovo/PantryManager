@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
 public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +28,13 @@ public class Ingrediente {
     @OneToMany(mappedBy = "ingrediente")
     private Set<RecetaToIngrediente> recetaToIngrediente;
 
+    public Ingrediente(Integer id, String nombre, String tipo, int calorias, String imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.calorias = calorias;
+        this.imagen = imagen;
+    }
 
     public Integer getId() {
         return id;

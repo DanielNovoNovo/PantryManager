@@ -11,19 +11,12 @@ import lombok.NoArgsConstructor;
 public class RecetaDTO {
 
     private Integer Id;
-
     private String nombre;
-
     private String pasos;
-
     private int tiempo_preparacion;
-
     private String dificultad;
-
     private String tipo_comida;
-
     private String autor;
-
     private String enlace;
 
     public Receta convertirModel() {
@@ -38,7 +31,6 @@ public class RecetaDTO {
         receta.setAutor(this.autor);
         receta.setEnlace(this.enlace);
         return receta;
-
     }
 
     public RecetaDTO crearDTO(Receta receta) {

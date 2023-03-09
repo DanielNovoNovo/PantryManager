@@ -35,6 +35,13 @@ public class RecetaToIngrediente {
         this.cantidad = cantidad;
     }
 
+    public RecetaToIngrediente(Integer id, int idReceta, int idIngrediente, String cantidad) {
+        this.id = id;
+        this.idReceta = idReceta;
+        this.idIngrediente = idIngrediente;
+        this.cantidad = cantidad;
+    }
+
     public int getId() {
         return id;
     }
