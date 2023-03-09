@@ -1,0 +1,151 @@
+Existirán 5 niveles de Usuario:
+	1) Usuario no registrado: usuario que entra en la aplicación sin iniciar sesión 
+	(solo dispone de acceso a funcionalidades básicas y no tiene asociado ningún registro en la BD)
+	2) Usuario registrado: usuario que ha iniciado sesión en la aplicación 
+	(dispone acceso a más funcionalidades y tiene asociado un registro asociado en la BD)
+	3) Usuario-moderador: usuario registrado + capacidad de rechazar/aceptar propuestas de receta de los usuarios
+	4) Usuario-administrador: usuario con plenos privilegios sobre la aplicación (puede gestionar la BD a su antojo,
+	borrando usuarios, recetas...)
+	No puede dar derechos de administrador a otros usuarios, pero sí puede otorgar derechos de moderador
+	5) Godadmin: cuenta dueña de la aplicación: usuario-administrador + capacidad de proporcionar derechos de
+	administrador a otros usuarios
+	* Habrá que añadir un campo para especificarlo; p.e: Nivel_de_usuario 
+	(Valores: "Corriente", "Moderador", "Administrador" y "GodAdmin")
+
+1) ENTIDAD: Usuario
+	* Registrarse
+		a) [Consultar por nombre OR email]
+			a.1) Si devuelve algo, cancelamos el registro
+			a.2) Si no devuelve nada, [Insertamos un objeto Usuario en la BD]
+
+	* Iniciar sesión
+		a) [Consultar por nombre nombre AND email]
+			a.1) Si devuelve algo, accedemos a la aplicación
+			a.2) Si no devuelve nada, cancelamos el inicio de sesión
+
+	* Agregar, actualizar y eliminar Usuarios
+		a) Administradores: 
+			a.1) Solo pueden agregar cuentas de moderadores y usuarios corrientes
+			(... WHERE Nivel_de_usuario IN("Corriente", "Moderador"))
+			a.2) Solo pueden eliminar cuentas de moderadores y usuarios corrientes
+			(... WHERE Nivel_de_usuario IN("Corriente", "Moderador"))
+			a.3) Solo pueden modificar cuentas de moderadores y usuario corrientes
+			(... WHERE Nivel_de_usuario IN("Corriente", "Moderador"))
+		b) Godadmin: sin limitaciones
+
+2) ENTIDAD: Receta
+	* Mostrar listado completo de recetas 
+		a) [Consultar la tabla entera de Recetas]
+
+	* Agregar filtros a la lista completa
+		a) [Consultar por nombre AND tiempo_preparación AND dificultad AND tipo_comida AND Autor]
+			a.1) Para el match con el nombre de la receta y el autor, 
+			bastará con que el texto introducido esté contenido en el nombre
+			a.2) Para el tiempo de preparación, se usará un slider y se mostrarán las recetas cuya duración
+			esté comprendida en el rango [tiempo -3 , tiempo + 3]
+			a.3) Para la dificultad y el tipo de comida, habrá un listado de opciones predefinido
+			(p.e: Dificultad --> Bajo/Media/Alta, en un ComboBox)
+
+	* Sugerir recetas en base a las cantidad que dispongamos de cada ingrediente
+		- Aquí necesitaríamos un método que represente nuestro algoritmo de recomendación, es una cuestión 
+		bastante compleja pero yo propondría hacer lo siguiente: a cada receta le podemos asignar un % de matcheo
+		(para ello podemos agregar un campo double en la relación guarda, que vaya de 0.0 a 1.0, p.e: Match)
+		- A nivel de código necesitaríamos:
+			0. Integer idUsuario --> [Devolver el id del usuario conectado - Tabla Usuario]
+			1. List<Receta> recetas --> [Devolver una lista con todas las Recetas - Tabla Recetas]
+			2. List<Integer> idsIngredientesReceta --> [Devolver una lista con los ids de todos los
+			ingredientes de una receta (recetas[x]) - Tabla tiene, filtrando por el id de la receta]
+			* Usar un ORDER BY id
+			3. List<Int> cantidadesRequeridas --> [Devolver una lista con las cantidades requeridas 
+			de cada uno de los ingrediente de la receta - Tabla tienen]	
+			* Usar un ORDER BY id
+			4. List<Int> cantidadesDisponibles --> [Devolver una lista con las cantidades disponibles
+			de cada uno de los ingredientes de la receta - Tabla almacena, filtrando por el id de usuario
+			y la lista de ids de ingredientes; p.e: ... WHERE idUsuario = 1 AND idIngrediente IN (1,2,3)]
+			* Usar un ORDER BY id
+			5. List<Double> ratioDisponibilidad --> En un bucle for, ir cargando cada posición 
+			de la siguiente manera: ratioDisponibilidad[x] = cantidadesDisponibles[x] / cantidadesRequeridas[x]
+			(si la operación es > 1.0, hacemos que sea =1.0)
+			6. Calcular la media de todos los valores contenidos en la lista del ratio y actualizar dicho 
+			valor en el campo Match de la tabla 'guarda'
+			[REPETIR LA INTERACIÓN PARA EL RESTO DE RECETAS, ASÍ ACTUALIZAREMOS TODOS LOS MATCH]
+			7. List<Int> idsReceta --> [Devolver una lista con los ids de todas las recetas, ordernando
+			por Match con un ORDER BY Match - Tabla 'guarda'
+			8. List<Receta> --> [Devolver una lista de Receta pasando como parámetro la lista idsReceta
+			Para respetar el orden, de modo que salgan primero las recetas de mayor Match:
+
+			SELECT * FROM Receta WHERE id IN (2,3,1,8,6)
+			ORDER BY CASE id
+			WHEN 2 THEN 1
+			WHEN 3 THEN 2
+			WHEN 1 THEN 3
+			WHEN 8 THEN 4
+			WHEN 6 THEN 5
+			END;
+			
+	* Proponer recetas (opción solo visible para usuarios de nivel 2, 3 y 4)
+		- Se agregará un campo "Estado" a la tabla, que podrá tomar 3 valores ("Aceptada", "Pendiente", "Rechazada")
+		- Se agregarán 3 campos (int); "VotosPositivos", "VotosNegativos" y "VotosTotales"
+		a) [Insertamos un objeto Receta en la BD, Estado = "Pendiente"]
+		b) [Insertamos los ingredientes que contendrá y la cantidad de cada uno - Tabla tiene]
+		(Al proponer una receta nos aparecerá un List Box que nos permitirá marcar el ingrediente y un Text Box
+		o Slider para asignar la cantidad. Por último, o botón de Añadir para insertar dicha info, en la tabla.
+		El List Box debe retornar la lista de todos los ingredientes y debe adminitar filtros, pero eso ya
+		iría en el apartado de Ingredientes)
+
+	* Moderar recetas (opción solo visible para usuarios de nivel 3)
+		a) [Actualizamos los campos VotosPositivos, VotosNegativos y VotosTotales]
+
+	* Actualizar catálogo de recetas (opción solo visible para los usuarios de nivel 4 y 5)
+		- Cada propuesta de receta será evaluada por 10 moderadores distintos y para que sea aceptada
+		tendrá que recibir al menos 7/10 votos positivos
+		a) [Actualizar el Estado de todas aquellas recetas WHERE Estado = "Pendiente" AND VotosTotales = 10]
+
+	* Descartar recetas rechazadas (opción solo visible para los usuarios de nivel 4 y 5)
+		a) [Deletear todas las Recetas WHERE Estado = "Rechazada"]
+
+	* Agregar, actualizar y eliminar recetas (opción solo visible para los usuarios de nivel 4 y 5)
+
+	*** Aquí también sería interesante añadir un campo boleano (p.e. EsPersonalizada) para indicar
+	que recetas pertecen al catálogo general y cuales son propias de cada usuario. De esta forma, cada
+	usuario podría crear su propias recetas y añadirlas a su lista personal sin que éstas interfieran en los
+	algoritmos de recomendación para el resto de usuarios
+	(tened en cuenta que tal y como está montado solo existen recetas predefinidas que los usuarios proponen y
+	los moderadores votan).
+	Para el caso de los ingredientes va a ocurrir lo mismo, partimos de un BD de ingredientes ya predefinida
+	que solo los administradores y el godadmin podrán modificar. EL usuario corriente solo podra módificar
+	la 'cantidad almacenada' de la Tabla 'almacena'
+
+3. ENTIDAD: Ingrediente
+	* Obtener listado completo de Ingredientes (para cuando sea necesario devolverlos en un List Box)
+	[Consultar la tabla entera de Ingrediente]
+
+	* Filtrar ingredientes por nombre
+	[Consultar por nombre en la Tabla Ingredientes]
+
+	* Actualizar la cantidad almacenada de cada ingrediente (opción visible para usuarios de nivel 2 en adelante)
+	[Update en 'cantidadAlmacenada' de la Tabla 'almacena', filtrando por idUsuario]
+
+	* Agregar, actualizar y eliminar Ingredientes (opción solo visible para los usuarios de nivel 4 y 5)
+
+4. ENTIDAD: Autor
+	* Obtener listado completo de Autores
+	[Consultar la tabla entera de Autores]
+
+	* Agregar filtros a la lista de Autores
+	[Consultar por nombre AND apellido AND pais]
+
+	* Agregar, actualizar y eliminar Autores (opción solo visible para los usuarios de nivel 4 y 5)
+
+
+
+
+
+
+
+
+
+
+
+
+
