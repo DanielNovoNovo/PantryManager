@@ -22,16 +22,10 @@ public class IngredienteController {
     @PostMapping("/crear")
     @Operation(summary = "Crea un nuevo ingrediente")
     public ResponseEntity<?> create(@RequestBody IngredienteDTO ingredienteDTO) {
-        Integer id = ingredienteDTO.getId();
-        String nombre = ingredienteDTO.getNombre();
-        String tipo = ingredienteDTO.getTipo();
-        int calorias = ingredienteDTO.getCalorias();
-        String imagen = ingredienteDTO.getImagen();
-
-        Optional<Ingrediente> ingredienteConsultado = service.getByNombre(nombre);
+        Optional<Ingrediente> ingredienteConsultado = service.getByNombre(ingredienteDTO.getNombre());
 
         if (!ingredienteConsultado.isPresent()) {
-            Ingrediente ingredienteGuardado = service.create(ingredienteDTO.convertirAModel());
+            Ingrediente ingredienteGuardado = service.create(ingredienteDTO.toModel());
             return ResponseEntity.status(HttpStatus.CREATED).body(ingredienteGuardado);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El ingrediente ya fue añadido previamente");
@@ -72,11 +66,11 @@ public class IngredienteController {
         String imagen = ingredienteDTO.getImagen();
 
         // Buscar el ingrediente por ID
-        Optional<Ingrediente> ingredienteExistente = service.getById(id);
+        Optional<Ingrediente> ingredienteConsultado = service.getById(id);
 
-        if (ingredienteExistente.isPresent()) {
+        if (ingredienteConsultado.isPresent()) {
             // Si el ingrediente existe, actualizarlo
-            Ingrediente ingredienteActualizado = ingredienteDTO.convertirAModel();
+            Ingrediente ingredienteActualizado = ingredienteDTO.toModel();
             service.update(ingredienteActualizado);
             return ResponseEntity.ok(ingredienteActualizado);
         } else {

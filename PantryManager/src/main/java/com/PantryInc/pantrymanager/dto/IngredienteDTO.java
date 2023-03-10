@@ -1,7 +1,6 @@
 package com.PantryInc.pantrymanager.dto;
 
 import com.PantryInc.pantrymanager.model.Ingrediente;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +15,9 @@ public class IngredienteDTO {
     private int calorias;
     private String imagen;
 
-    public Ingrediente convertirAModel() {
+    public Ingrediente toModel() {
         Ingrediente ingrediente = new Ingrediente();
+
         ingrediente.setId(this.id);
         ingrediente.setNombre(this.nombre);
         ingrediente.setTipo(this.tipo);
@@ -27,12 +27,13 @@ public class IngredienteDTO {
         return ingrediente;
     }
 
-    public IngredienteDTO crearDTO(Ingrediente ingrediente) {
+    public IngredienteDTO toDTO(Ingrediente ingrediente) {
         this.setId(ingrediente.getId());
         this.setNombre(ingrediente.getNombre());
         this.setTipo(ingrediente.getTipo());
         this.setCalorias(ingrediente.getCalorias());
         this.setImagen(ingrediente.getImagen());
+
         return this;
     }
 }

@@ -13,7 +13,14 @@ http://localhost:8090/api/ingredientes/crear
 
 - CONSULTAR POR X CAMPO (GET)
 http://localhost:8090/api/ingredientes/consultar_por_nombre?nombre=Verdura (con @RequestParameter)
+http://localhost:8090/api/autores/listar_por_nombre_and_apellido_and_pais?nombre=óscar&apellido=&pais=españa
+http://localhost:8090/api/autores/listar_por_nombre_and_apellido_and_pais?nombre=&apellido=antelo&pais=
+(con @RequestParameter)
+* Si los definimos como opcionales, podemos no incluir la variable en la URL y automáticamente tomará NULL
+como valor
+
 http://localhost:8090/api/ingredientes/listar_por_nombre/Tomate (con @PathVariable)
+http://localhost:8090/api/usuarios/listar_por_nombre_or_email/Óscar/oscar97@gmail.com (con @PathVariable)
 
 - ACTUALIZAR UN REGISTRO (PUT)
 http://localhost:8090/api/ingredientes/actualizar
@@ -29,3 +36,86 @@ http://localhost:8090/api/ingredientes/actualizar
 - BORRAR UN REGISTRO:
 http://localhost:8090/api/ingredientes/borrar_por_id?id=1 (con @RequestParameter)
 http://localhost:8090/api/ingredientes/borrar_por_id/1 (con @PathVariable)
+
+* FILTROS ACUMULATIVOS
+
+@Query(value = "SELECT * FROM Usuarios "
+            + "WHERE (lower(Nombre) = :nombre OR :nombre is NULL) "
+            + "OR (lower(Email) = :email OR :email is NULL)", nativeQuery = true)
+    List<Usuario> searchByNombreOrEmail(@Param("nombre") String p1, @Param("email") String p2);
+
+@GetMapping("/listar_por_nombre_or_email")
+    @Operation(summary = "Listar usuarios filtrando por nombre OR email")
+    public ResponseEntity<?> getByNombreOrEmail(@RequestParam(name = "nombre", required = false) String nombre,
+                                                @RequestParam(name = "email", required = false) String email) {
+
+        if ("-".equals(nombre)) {
+            nombre = null;
+        }
+        if ("-".equals(email)) {
+            email = null;
+        }
+
+        List<Usuario> usuarios = service.getByNombreOrEmail(nombre, email);
+
+        if (!usuarios.isEmpty()) {
+            return ResponseEntity.ok(usuarios);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Los usuarios no se encontraron");
+        }
+    }
+
+    --------------------------------------
+    Si en nuestra tabla intermedia no fuesemos agregar ningún campo extra, sería suficiente con añadir estas 2 anotaciones
+    en las entidades a relacionar, y podríamos prescindir de crear una clase intermedia explícita en Java.
+    En cambio, cuando necesitamos agregar campos extra en la relación (p.e: Cantidad) será siempre necesario crear una clase
+    intermedia explícita en Java (p.e: RecetaToIngrediente para relacionar Receta con Ingrediente, se deja de usar el @ManyToMany
+
+    @ManyToMany
+        @JoinTable(
+                name = "tienen",
+                joinColumns = @JoinColumn(name = "Id_receta"),
+                inverseJoinColumns = @JoinColumn(name = "Id_ingrediente")
+        )
+        private Set<Ingrediente> ingredientes; (y el mapped by en la otra clase)
+
+        Ejemplo de JSON con un objeto dentro de otro:
+
+        {
+            "nombre": "Nombre de la receta",
+            "pasos": "Pasos de la receta",
+            "tiempoPreparacion": 30,
+            "dificultad": "Fácil",
+            "tipoComida": "Postre",
+            "enlace": "https://www.receta.com",
+            "estado": "Publicada",
+            "votosPositivos": 0,
+            "votosNegativos": 0,
+            "votosTotales": 0,
+            "esPersonalizada": false,
+            "autor": {
+                "id": 1
+            }
+        }
+
+        {
+          "id": 1,
+          "ingredientes": [
+            {
+              "nombre": "leche",
+              "cantidad": 2
+            },
+            {
+              "nombre": "huevos",
+              "cantidad": 3
+            },
+            {
+              "nombre": "azúcar",
+              "cantidad": 1
+            }
+          ]
+        }
+
+
+
+

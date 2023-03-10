@@ -16,7 +16,7 @@ public interface IngredienteRepository extends JpaRepository<Ingrediente, Intege
             "WHERE lower(Nombre) = :nombre AND lower(Tipo) = :tipo " +
             "AND lower(Calorias) = :calorias AND lower(Imagen) = :imagen", nativeQuery = true)
     List<Ingrediente> searchByAllFields(@Param("nombre") String p1, @Param("tipo") String p2,
-                                            @Param("calorias") int p3, @Param("imagen") String p4);
+                                        @Param("calorias") int p3, @Param("imagen") String p4);
 
     Optional<Ingrediente> findByNombre(String nombre);
 
