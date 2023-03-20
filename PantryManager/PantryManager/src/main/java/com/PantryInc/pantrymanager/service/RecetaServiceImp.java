@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,17 @@ public class RecetaServiceImp implements RecetaService {
     @Transactional
     public Receta guardar(Receta receta) {
         return repositorio.save(receta);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Receta> eliminar(Integer Id) {
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional
+    public List<Receta> buscarPorNombre(String nombre) {
+        return repositorio.findByNombreContainingIgnoreCase(nombre);
     }
 }

@@ -10,11 +10,8 @@ import java.util.Optional;
 @Repository
 public interface RecetaRepository extends JpaRepository<Receta, Integer> {
 
-   Optional<Receta> findByNombre(String nombre);
+   List<Receta> findByNombreContainingIgnoreCase(String nombre);
 
-   List<Receta> findByNombreContains(String nombre);
-
-   List<Receta> findByNombreContainsOrderByNombreAsc(String nombre);
 
 
 

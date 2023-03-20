@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "Receta")
 @NoArgsConstructor //lombok - Crea
@@ -39,5 +38,19 @@ public class Receta {
     @Column(name = "Enlace")
     private String enlace;
 
+    @Column(name = "Estado")
+    private String estado;
+
+    @Column(name = "Votos_positivos")
+    private int votos_positivos;
+
+    @Column(name = "Votos_negativos")
+    private int votos_negativos;
+
+    @Column(name = "Votos_totales")
+    private int votos_totales;
+
+    @Column(name = "Es_personalizada")
+    private int es_personalizada;
 
 }

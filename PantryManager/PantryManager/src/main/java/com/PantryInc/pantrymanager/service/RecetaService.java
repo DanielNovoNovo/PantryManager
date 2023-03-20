@@ -1,8 +1,9 @@
 package com.PantryInc.pantrymanager.service;
 
 import com.PantryInc.pantrymanager.model.Receta;
-import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 public interface RecetaService {
 
@@ -10,5 +11,8 @@ public interface RecetaService {
 
     public Receta guardar(Receta receta);
 
+    public Optional<Receta> eliminar(Integer Id);
+
+    List<Receta> buscarPorNombre(String nombre);
 }
 
